@@ -21,8 +21,8 @@ const sampleProducts = [
     sku: '15485CBR331',
     price: 69.52,
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
-    inStock: true,
-    cartQuantity: 3,
+    description: 'Compact and energy-efficient 12V spotlight perfect for outdoor lighting and landscape applications.',
+    moq: 10
   },
   {
     id: '2',
@@ -30,8 +30,8 @@ const sampleProducts = [
     sku: '16024CBR27325',
     price: 295.68,
     image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=300&h=300&fit=crop',
-    inStock: true,
-    cartQuantity: 4,
+    description: 'High-performance LED with adjustable lumen output for flexible lighting requirements.',
+    moq: 5
   },
   {
     id: '3',
@@ -39,8 +39,8 @@ const sampleProducts = [
     sku: '18392FLD445',
     price: 124.99,
     image: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=300&h=300&fit=crop',
-    inStock: true,
-    cartQuantity: 2,
+    description: 'Durable LED flood light ideal for security, industrial, and large-area illumination.',
+    moq: 8
   },
   {
     id: '4',
@@ -48,8 +48,8 @@ const sampleProducts = [
     sku: '19847GDN221',
     price: 89.99,
     image: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=300&h=300&fit=crop',
-    inStock: true,
-    cartQuantity: 1,
+    description: 'Wi-Fi-enabled smart garden light with customizable color and scheduling features.',
+    moq: 12
   },
   {
     id: '5',
@@ -57,8 +57,8 @@ const sampleProducts = [
     sku: '20156TRK889',
     price: 199.99,
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop',
-    inStock: true,
-    cartQuantity: 5,
+    description: 'Heavy-duty track light designed for commercial and industrial interior lighting.',
+    moq: 4
   },
   {
     id: '6',
@@ -66,35 +66,24 @@ const sampleProducts = [
     sku: '21334PND667',
     price: 159.99,
     image: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=300&h=300&fit=crop',
-    inStock: true,
-    cartQuantity: 2,
+    description: 'Stylish pendant ceiling light suitable for dining areas, kitchens, or modern interiors.',
+    moq: 6
   },
 ];
+
 
 const ProductListingScreen = ({ navigation }) => {
   const [products, setProducts] = useState(sampleProducts);
   const [searchQuery, setSearchQuery] = useState('');
   const [cartCount, setCartCount] = useState(1);
-  const [filteredProducts, setFilteredProducts] = useState(sampleProducts);
-
-  const handleAddToCart = (product) => {
-    Alert.alert(
-      'Added to Cart',
-      `${product.name} has been added to your cart`,
-      [{ text: 'OK' }]
-    );
-    setCartCount(prev => prev + 1);
-  };
 
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Products</Text>
       </View>
 
-      {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={styles.searchBar}>
           <Ionicons name="search-outline" size={20} color="#999" style={styles.searchIcon} />
@@ -105,36 +94,19 @@ const ProductListingScreen = ({ navigation }) => {
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
-          <TouchableOpacity style={styles.scanButton}>
-            <Ionicons name="scan-outline" size={20} color="#6366f1" />
-          </TouchableOpacity>
+          
         </View>
         
-        <TouchableOpacity 
-          style={styles.cartButton}
-          onPress={() => navigation.navigate('Cart')}
-        >
-          <Ionicons name="bag-outline" size={24} color="#fff" />
-          {cartCount > 0 && (
-            <View style={styles.cartBadge}>
-              <Text style={styles.cartBadgeText}>{cartCount}</Text>
-            </View>
-          )}
-        </TouchableOpacity>
       </View>
-
-      {/* Product Grid */}
       <FlatList
-        data={filteredProducts}
-        renderItem={ProductCard}
+        data={products}
+        renderItem={({ item }) => <ProductCard item={item} navigation={navigation} />}
         keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={styles.productGrid}
         columnWrapperStyle={styles.productRow}
         showsVerticalScrollIndicator={false}
       />
-
-      {/* Floating Cart Button */}
       <TouchableOpacity 
         style={styles.floatingCartButton}
         onPress={() => navigation.navigate('Cart')}
@@ -153,13 +125,12 @@ const ProductListingScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#fff',
+
   },
   header: {
     paddingHorizontal: 20,
     paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
     backgroundColor: '#fff',
   },
   headerTitle: {
@@ -182,7 +153,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderRadius: 25,
     paddingHorizontal: 15,
-    marginRight: 15,
+    // marginRight: 15,
     height: 50,
   },
   searchIcon: {
@@ -222,7 +193,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   productGrid: {
-    padding: 15,
+    paddingHorizontal: 15,
+    // backgroundColor:"pink"
   },
   productRow: {
     justifyContent: 'space-between',

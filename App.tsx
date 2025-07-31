@@ -1,19 +1,15 @@
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { AuthProvider, useAuth } from './src/Context/AuthContext';
 import LoginScreen from './src/Screens/LoginScreen';
 import SignupScreen from './src/Screens/SignupScreen';
-
+import AppNavigator from './navigation';
 
 function HomeScreen() {
   return (
-    <View style={styles.container}>
-      {/* Home content here */}
-      {/* <SignupScreen/> */}
-      {/* <LoginScreen/> */}
-      <Text>hi</Text>
-      <ProductListingScreen/>
+    <View style={{ flex: 1,backgroundColor: '#fff' }}>
+      <AppNavigator />
       <StatusBar style="auto" />
     </View>
   );
@@ -21,7 +17,6 @@ function HomeScreen() {
 
 
 import React, { useState } from 'react';
-import ProductListingScreen from './src/Screens/ProductScreen';
 
 function Main() {
   const { user } = useAuth();
