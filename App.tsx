@@ -1,10 +1,13 @@
 
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
 import { AuthProvider, useAuth } from './src/Context/AuthContext';
 import LoginScreen from './src/Screens/LoginScreen';
 import SignupScreen from './src/Screens/SignupScreen';
 import AppNavigator from './navigation';
+import { store } from './src/store';
 
 function HomeScreen() {
   return (
@@ -16,7 +19,6 @@ function HomeScreen() {
 }
 
 
-import React, { useState } from 'react';
 
 function Main() {
   const { user } = useAuth();
@@ -30,9 +32,11 @@ function Main() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Main />
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <Main />
+      </AuthProvider>
+    </Provider>
   );
 }
 

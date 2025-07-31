@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,24 +9,41 @@ import {
   Image,
   Dimensions,
   Alert,
-  Animated,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/slices/cartSlice';
 import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
-const ProductDescriptionScreen = ({ navigation, route }) => {
-  const [cartCount, setCartCount] = useState(1);
+interface ProductDescriptionScreenProps {
+  navigation: any;
+  route: {
+    params: {
+      product: {
+        id: string;
+        name: string;
+        sku: string;
+        price: number;
+        image: string;
+        description: string;
+        moq: number;
+      };
+    };
+  };
+}
 
-  const product = route?.params?.product 
+const ProductDescriptionScreen: React.FC<ProductDescriptionScreenProps> = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+  const product = route?.params?.product;
 
   const handleAddToCart = () => {
+    dispatch(addToCart(product));
     Alert.alert(
       'Added to Cart',
       `${product.name} has been added to your cart`,
       [{ text: 'OK' }]
     );
-    setCartCount(prev => prev + 1);
   };
 
 
@@ -85,19 +102,6 @@ const ProductDescriptionScreen = ({ navigation, route }) => {
           <Text style={styles.addToCartText}>Add to cart</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Floating Cart Button */}
-      <TouchableOpacity 
-        style={styles.floatingCartButton}
-        onPress={() => navigation.navigate('Cart')}
-      >
-        <Ionicons name="bag" size={24} color="#fff" />
-        {cartCount > 0 && (
-          <View style={styles.floatingCartBadge}>
-            <Text style={styles.floatingCartBadgeText}>{cartCount}</Text>
-          </View>
-        )}
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
   productPrice: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#4CAF50',
+    color: '#33926c',
   },
   openSection: {
     padding: 20,
@@ -222,7 +226,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   addToCartButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#33926c',
     borderRadius: 12,
     paddingVertical: 15,
     alignItems: 'center',
@@ -232,41 +236,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
-  floatingCartButton: {
-    position: 'absolute',
-    bottom: 100,
-    right: 20,
-    backgroundColor: '#4CAF50',
-    borderRadius: 30,
-    width: 60,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
-  },
-  floatingCartBadge: {
-    position: 'absolute',
-    top: -5,
-    right: -5,
-    backgroundColor: '#f44336',
-    borderRadius: 12,
-    minWidth: 24,
-    height: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  floatingCartBadgeText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: 'bold',
-  },
+  
 });
 
 export default ProductDescriptionScreen;

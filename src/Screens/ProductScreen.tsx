@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ProductCard from '../Components/ProductCard';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../store/slices/cartSlice';
 
 // Sample product data
 const sampleProducts = [
@@ -73,9 +75,11 @@ const sampleProducts = [
 
 
 const ProductListingScreen = ({ navigation }) => {
+
+  const cartItems = useSelector(selectCartItems);
   const [products, setProducts] = useState(sampleProducts);
   const [searchQuery, setSearchQuery] = useState('');
-  const [cartCount, setCartCount] = useState(1);
+  const [cartCount, setCartCount] = useState(cartItems?.length);
 
 
   return (
@@ -204,7 +208,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     right: 20,
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#33926c',
     borderRadius: 30,
     width: 60,
     height: 60,
