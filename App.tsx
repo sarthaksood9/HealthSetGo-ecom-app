@@ -13,6 +13,7 @@ function HomeScreen() {
       {/* <SignupScreen/> */}
       {/* <LoginScreen/> */}
       <Text>hi</Text>
+      <ProductListingScreen/>
       <StatusBar style="auto" />
     </View>
   );
@@ -20,6 +21,7 @@ function HomeScreen() {
 
 
 import React, { useState } from 'react';
+import ProductListingScreen from './src/Screens/ProductScreen';
 
 function Main() {
   const { user } = useAuth();
