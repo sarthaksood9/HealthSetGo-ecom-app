@@ -80,7 +80,7 @@ const SignupScreen = ({ goToLogin }: { goToLogin: () => void }) => {
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <LinearGradient
-            colors={['#667eea', '#764ba2']}
+            colors={['#66b89c', '#33926c']}
             style={styles.header}
           >
             <Text style={styles.welcomeText}>Create Account</Text>
@@ -181,7 +181,7 @@ const SignupScreen = ({ goToLogin }: { goToLogin: () => void }) => {
               disabled={loading}
             >
               <LinearGradient
-                colors={['#667eea', '#764ba2']}
+                colors={['#66b89c', '#33926c']}
                 style={styles.signupButtonGradient}
               >
                 {loading ? (
@@ -292,8 +292,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   checkboxChecked: {
-    backgroundColor: '#667eea',
-    borderColor: '#667eea',
+    backgroundColor: '#33926c',
+    borderColor: '#33926c',
   },
   checkboxText: {
     flex: 1,
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   loginLink: {
-    color: '#667eea',
+    color: '#33926c',
     fontSize: 16,
     fontWeight: 'bold',
   },

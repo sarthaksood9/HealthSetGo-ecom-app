@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import { selectCartItems, selectCartTotal, removeFromCart, updateQuantity } from '../store/slices/cartSlice';
 
-const { width } = Dimensions.get('window');
 
 type CartScreenProps = {
   navigation: any;
