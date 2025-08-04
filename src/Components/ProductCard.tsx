@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
   },
   quantityControlsRow: {
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 8,
+    
   },
   deleteButton: {
     width: 36,
@@ -201,6 +201,8 @@ const styles = StyleSheet.create({
     borderColor: '#E0E0E0',
     backgroundColor: '#fff',
     paddingHorizontal: 4,
+    height: 35,
+    
   },
   quantityButton: {
     width: 28,

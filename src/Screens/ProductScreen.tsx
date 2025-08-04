@@ -74,12 +74,11 @@ const sampleProducts = [
 ];
 
 
-const ProductListingScreen = ({ navigation }) => {
+const ProductListingScreen = ({ navigation }:any) => {
 
   const cartItems = useSelector(selectCartItems);
   const [products, setProducts] = useState(sampleProducts);
   const [searchQuery, setSearchQuery] = useState('');
-  const [cartCount, setCartCount] = useState(cartItems?.length);
 
 
   return (
@@ -116,11 +115,6 @@ const ProductListingScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('Cart')}
       >
         <Ionicons name="cart" size={24} color="#fff" />
-        {cartCount > 0 && (
-          <View style={styles.floatingCartBadge}>
-            <Text style={styles.floatingCartBadgeText}>{cartCount}</Text>
-          </View>
-        )}
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -179,22 +173,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-  },
-  cartBadge: {
-    position: 'absolute',
-    top: -5,
-    right: -5,
-    backgroundColor: '#f44336',
-    borderRadius: 10,
-    minWidth: 20,
-    height: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cartBadgeText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: 'bold',
   },
   productGrid: {
     paddingHorizontal: 15,
